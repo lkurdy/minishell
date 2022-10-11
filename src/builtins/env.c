@@ -6,7 +6,7 @@
 /*   By: rben-tkh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:43:09 by rben-tkh          #+#    #+#             */
-/*   Updated: 2022/09/30 15:21:22 by lkurdy           ###   ########.fr       */
+/*   Updated: 2022/10/11 23:28:48 by lkurdy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,25 @@ static int	joseph(char **args)
 			if (!i)
 				return (write(2, "numeric argument required\n", 26), 2);
 			else
-				return (write(2, "too many arguments\n", 19), 1);
+				return (write(2, "too many arguments\n", 19), -67231);
 		}
 		if (i > 0)
-			return (write(2, "minihlel: exit: too many arguments\n", 35), 1);
+			return (write(2, "minihlel: exit: too many arguments\n", 35), -67231);
 	}
 	return (d);
 }
 
 void	ft_exit(t_data *data, t_env *mini, t_env *origin, char **args)
 {
+	int	a;
+
+	a = 0;
 	if (args)
 	{
-		g_ecode = joseph(args);
-		if (g_ecode == 1)
+		a = joseph(args);
+		if (a == -67231)
 			return ;
+		g_ecode = a;
 	}
 	if (data && data->exit)
 		printf("exit\n");
