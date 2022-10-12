@@ -73,9 +73,7 @@ void	init_redi(t_data *redi, t_env *env, t_env *origin)
 		redi->in = init_irdouk(redi, redi->next->cmd, env, origin);
 	else if (redi && redi->code == DBOUT && redi->next->code < PIPE)
 		redi->out = open(redi->next->cmd, O_CREAT | O_RDWR | O_APPEND, 0664);
-	if (redi && redi->in == -1 && g_ecode == -42)
-		g_ecode = 0;
-	else if (redi && redi->in == -1 && g_ecode != -42 && g_ecode != 130)
+	if (redi && redi->in == -1 && g_ecode != 0 && g_ecode != 130)
 	{
 		write(2, "minihlel: ", 10);
 		perror(redi->next->cmd);
