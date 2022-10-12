@@ -42,7 +42,7 @@ void	signal_irdouk(char *str)
 		write(2, str, ft_strlen(str));
 		write(2, "')\n", 3);
 	}
-	g_ecode = -42;
+	g_ecode = 0;
 }
 
 void	minishell(t_env *mini, t_env *origin, char *str)

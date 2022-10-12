@@ -32,10 +32,10 @@ static int	joseph(char **args)
 			if (!i)
 				return (write(2, "numeric argument required\n", 26), 2);
 			else
-				return (write(2, "too many arguments\n", 19), -67231);
+				return (write(2, "too many arguments\n", 19), -672);
 		}
 		if (i > 0)
-			return (write(2, "minihlel: exit: too many arguments\n", 35), -67231);
+			return (write(2, "minihlel: exit: too many arguments\n", 35), -672);
 	}
 	return (d);
 }
@@ -48,7 +48,7 @@ void	ft_exit(t_data *data, t_env *mini, t_env *origin, char **args)
 	if (args)
 	{
 		a = joseph(args);
-		if (a == -67231)
+		if (a == -672)
 			return ;
 		g_ecode = a;
 	}

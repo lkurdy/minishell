@@ -66,20 +66,22 @@ static int	init_irdouk(t_data *redi, char *s1, t_env *env, t_env *origin)
 void	init_redi(t_data *redi, t_env *env, t_env *origin)
 {
 	if (redi && redi->code == IN && redi->next->code < PIPE)
+	{
 		redi->in = open(redi->next->cmd, O_RDWR);
+		if (redi && redi->in == -1)
+		{
+			write(2, "minihlel: ", 10);
+			perror(redi->next->cmd);
+			g_ecode = 1;
+		}
+	}
 	else if (redi && redi->code == OUT && redi->next->code < PIPE)
 		redi->out = open(redi->next->cmd, O_CREAT | O_RDWR | O_TRUNC, 0664);
 	else if (redi && redi->code == DBIN && redi->next->code < PIPE)
 		redi->in = init_irdouk(redi, redi->next->cmd, env, origin);
 	else if (redi && redi->code == DBOUT && redi->next->code < PIPE)
 		redi->out = open(redi->next->cmd, O_CREAT | O_RDWR | O_APPEND, 0664);
-	if (redi && redi->in == -1 && g_ecode != 0 && g_ecode != 130)
-	{
-		write(2, "minihlel: ", 10);
-		perror(redi->next->cmd);
-		g_ecode = 1;
-	}
-	else if (redi && redi->out == -1)
+	if (redi && redi->out == -1)
 	{
 		write(2, "minihlel: ", 10);
 		perror(redi->next->cmd);
